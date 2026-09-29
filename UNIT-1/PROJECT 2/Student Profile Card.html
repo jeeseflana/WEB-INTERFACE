@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Profile Card</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .form-box, .card-box {
+    background: #fff;
+    border-radius: 14px;
+    padding: 30px;
+    width: 320px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+    margin-top: 14px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+  }
+
+  input:focus {
+    border-color: #764ba2;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 22px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #764ba2;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  button:hover {
+    background: #5e3a86;
+  }
+
+  .error {
+    color: #d9534f;
+    font-size: 13px;
+    margin-top: 10px;
+    text-align: center;
+    min-height: 16px;
+  }
+
+  /* Profile Card */
+  .card-box {
+    display: none;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    font-weight: bold;
+    margin: 0 auto 16px;
+  }
+
+  .card-box h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 4px;
+  }
+
+  .card-box .sub {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 18px;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+  }
+
+  .detail-row span:first-child {
+    color: #777;
+  }
+
+  .detail-row span:last-child {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .grade-badge {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+  }
+
+  .grade-A { background: #28a745; }
+  .grade-B { background: #17a2b8; }
+  .grade-C { background: #ffc107; color: #333; }
+  .grade-D { background: #fd7e14; }
+  .grade-F { background: #dc3545; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="form-box">
+    <h2>Student Details</h2>
+
+    <label for="name">Student Name</label>
+    <input type="text" id="name" placeholder="Enter full name">
+
+    <label for="roll">Roll No.</label>
+    <input type="text" id="roll" placeholder="Enter roll number">
+
+    <label for="marks">Marks (out of 100)</label>
+    <input type="number" id="marks" placeholder="Enter marks" min="0" max="100">
+
+    <button onclick="displayProfile()">Display Profile</button>
+    <div class="error" id="errorMsg"></div>
+  </div>
+
+  <div class="card-box" id="profileCard">
+    <div class="avatar" id="avatarInitial"></div>
+    <h3 id="cardName"></h3>
+    <div class="sub" id="cardRoll"></div>
+
+    <div class="detail-row">
+      <span>Marks</span>
+      <span id="cardMarks"></span>
+    </div>
+    <div class="detail-row">
+      <span>Status</span>
+      <span id="cardStatus"></span>
+    </div>
+
+    <div class="grade-badge" id="cardGrade"></div>
+  </div>
+
+</div>
+
+<script>
+  function calculateGrade(marks) {
+    if (marks >= 90) return "A";
+    if (marks >= 75) return "B";
+    if (marks >= 60) return "C";
+    if (marks >= 40) return "D";
+    return "F";
+  }
+
+  function displayProfile() {
+    const nameInput = document.getElementById("name");
+    const rollInput = document.getElementById("roll");
+    const marksInput = document.getElementById("marks");
+    const errorMsg = document.getElementById("errorMsg");
+
+    const name = nameInput.value.trim();
+    const roll = rollInput.value.trim();
+    const marks = parseFloat(marksInput.value);
+
+    errorMsg.textContent = "";
+
+    if (!name || !roll || marksInput.value === "") {
+      errorMsg.textContent = "Please fill in all fields.";
+      return;
+    }
+
+    if (isNaN(marks) || marks < 0 || marks > 100) {
+      errorMsg.textContent = "Marks must be a number between 0 and 100.";
+      return;
+    }
+
+    const grade = calculateGrade(marks);
+    const status = grade === "F" ? "Fail" : "Pass";
+
+    document.getElementById("avatarInitial").textContent = name.charAt(0).toUpperCase();
+    document.getElementById("cardName").textContent = name;
+    document.getElementById("cardRoll").textContent = "Roll No: " + roll;
+    document.getElementById("cardMarks").textContent = marks + " / 100";
+    document.getElementById("cardStatus").textContent = status;
+
+    const gradeBadge = document.getElementById("cardGrade");
+    gradeBadge.textContent = "Grade: " + grade;
+    gradeBadge.className = "grade-badge grade-" + grade;
+
+    document.getElementById("profileCard").style.display = "block";
+  }
+</script>
+
+</body>
+</html>

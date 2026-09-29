@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #fff1e6, #ffd6a5);
+    color: #3d2b1f;
+}
+
+/* NAVBAR */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: #fffaf5;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #c45a2c;
+}
+
+.nav-links a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: #5a4033;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #e76f51;
+}
+
+/* PAGE */
+
+.page {
+    text-align: center;
+    margin-top: 80px;
+    padding: 30px;
+}
+
+.page h1 {
+    font-size: 40px;
+    color: #7f3f2f;
+}
+
+.highlight {
+    color: #e76f51;
+}
+
+/* BUTTON */
+
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #e76f51;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background: #c44536;
+    transform: scale(1.05);
+}
+
+/* INFO BOX */
+
+.info {
+    margin: 25px auto;
+    padding: 20px;
+    max-width: 500px;
+    background: #fffaf5;
+    border-left: 5px solid #e76f51;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* CONTACT */
+
+.contact-box {
+    margin-bottom: 25px;
+}
+
+/* FORM */
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input,
+textarea {
+    width: 280px;
+    margin: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #e0b49a;
+    background: #fffaf5;
+    outline: none;
+    font-size: 14px;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #e76f51;
+    box-shadow: 0 0 5px rgba(231, 111, 81, 0.3);
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    background: #e76f51;
+    color: white;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #c44536;
+    transform: translateY(-2px);
+}
